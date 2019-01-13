@@ -186,7 +186,10 @@ def main() -> int:
     print()
 
     for month, month_prs in by_month.items():
-        print(f"### {month_prs[0].dt.strftime('%B').lower()}")
+        print(
+            f"### {month_prs[0].dt.strftime('%B').lower()} "
+            f'({len(month_prs)} prs)',
+        )
         print()
         print(_md_table([pr.display for pr in month_prs]))
         print()

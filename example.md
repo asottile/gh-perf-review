@@ -32,7 +32,7 @@
 
 ## by date
 
-### january
+### january (14 prs)
 
 |date      |link                        |title                                            |
 |----------|----------------------------|-------------------------------------------------|
@@ -52,7 +52,7 @@
 |2018-01-30|[pre-commit#694]            |Fix legacy commit-msg hooks                      |
 
 
-### february
+### february (15 prs)
 
 |date      |link                      |title                                                  |
 |----------|--------------------------|-------------------------------------------------------|
@@ -73,7 +73,7 @@
 |2018-02-28|[pre-commit-hooks#271]    |Don't add end-of-file newline while trimming whitespace|
 
 
-### march
+### march (19 prs)
 
 |date      |link                        |title                                      |
 |----------|----------------------------|-------------------------------------------|
@@ -98,7 +98,7 @@
 |2018-03-29|[pre-commit.github.io#159]  |Add jorisroovers/gitlint to list of hooks  |
 
 
-### april
+### april (5 prs)
 
 |date      |link                        |title                        |
 |----------|----------------------------|-----------------------------|
@@ -109,7 +109,7 @@
 |2018-04-30|[pre-commit-hooks#282]      |Replace legacy wheel metadata|
 
 
-### may
+### may (18 prs)
 
 |date      |link                        |title                                                           |
 |----------|----------------------------|----------------------------------------------------------------|
@@ -133,7 +133,7 @@
 |2018-05-28|[pre-commit#756]            |Invoke -mvenv with the original python if in a -mvirtualenv venv|
 
 
-### june
+### june (30 prs)
 
 |date      |link                        |title                                     |
 |----------|----------------------------|------------------------------------------|
@@ -169,7 +169,7 @@
 |2018-06-30|[pre-commit#773]            |Separate store from runner                |
 
 
-### july
+### july (22 prs)
 
 |date      |link                        |title                                                                        |
 |----------|----------------------------|-----------------------------------------------------------------------------|
@@ -197,7 +197,7 @@
 |2018-07-29|[pre-commit.github.io#176]  |Add pre-commit/pygrep-hooks repo                                             |
 
 
-### august
+### august (5 prs)
 
 |date      |link                        |title                                         |
 |----------|----------------------------|----------------------------------------------|
@@ -208,7 +208,7 @@
 |2018-08-16|[pre-commit#815]            |Update config                                 |
 
 
-### september
+### september (4 prs)
 
 |date      |link                      |title                                                |
 |----------|--------------------------|-----------------------------------------------------|
@@ -218,7 +218,7 @@
 |2018-09-22|[pre-commit#832]          |Fix rev-parse for older git versions                 |
 
 
-### october
+### october (16 prs)
 
 |date      |link                        |title                                                      |
 |----------|----------------------------|-----------------------------------------------------------|
@@ -240,7 +240,7 @@
 |2018-10-29|[pre-commit.github.io#188]  |Add bandit to list of hook repos                           |
 
 
-### november
+### november (3 prs)
 
 |date      |link                      |title                    |
 |----------|--------------------------|-------------------------|
@@ -249,7 +249,7 @@
 |2018-11-22|[pre-commit.github.io#191]|Add PyCQA/flake8         |
 
 
-### december
+### december (14 prs)
 
 |date      |link                        |title                                                        |
 |----------|----------------------------|-------------------------------------------------------------|
