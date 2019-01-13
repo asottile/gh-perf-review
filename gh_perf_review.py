@@ -151,7 +151,7 @@ def main() -> int:
     )
     query = urllib.parse.quote(query)
     url = f'/search/issues?q={query}&per_page=100&sort=merged'
-    resp = _get_all(url)
+    resp = _get_all(url, headers=headers)
 
     by_repo: Counter[str] = collections.Counter()
     for pr_dct in resp:
