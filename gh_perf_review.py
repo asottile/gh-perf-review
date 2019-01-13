@@ -14,7 +14,9 @@ from typing import List
 from typing import NamedTuple
 from typing import Optional
 from typing import Sequence
+from typing import Tuple
 
+DATE_FMT = '%Y-%m-%dT%H:%M:%SZ'
 PERIODS = {
     'q1': ('01-01', '03-31'),
     'q2': ('04-01', '06-30'),
@@ -35,6 +37,10 @@ class RepoCount(NamedTuple):
     repo: str
     prs: int
 
+    @property
+    def sort_key(self) -> Tuple[int, str]:
+        return -1 * self.prs, self.repo
+
 
 class _PRDisplay(NamedTuple):
     date: str
@@ -43,7 +49,7 @@ class _PRDisplay(NamedTuple):
 
 
 class PR(NamedTuple):
-    date: datetime.date
+    dt: datetime.datetime
     link_text: str
     link_url: str
     title: str
@@ -51,13 +57,14 @@ class PR(NamedTuple):
     @property
     def display(self) -> '_PRDisplay':
         return _PRDisplay(
-            self.date.isoformat(), f'[{self.link_text}]', self.title,
+            self.dt.date().isoformat(),
+            f'[{self.link_text}]',
+            self.title,
         )
 
     @classmethod
     def from_gh(cls, dct: Dict[str, Any]) -> 'PR':
-        date_s, _, _ = dct['closed_at'].partition('T')
-        date = datetime.date(*(int(p) for p in date_s.split('-')))
+        date = datetime.datetime.strptime(dct['closed_at'], DATE_FMT)
         _, _, repo = dct['repository_url'].rpartition('/')
         link_text = f"{repo}#{dct['number']}"
         return cls(date, link_text, dct['html_url'], dct['title'])
@@ -160,7 +167,7 @@ def main() -> int:
     prs = sorted([PR.from_gh(pr) for pr in resp])
     by_month: DefaultDict[int, List[PR]] = collections.defaultdict(list)
     for pr in prs:
-        by_month[pr.date.month].append(pr)
+        by_month[pr.dt.month].append(pr)
 
     print(f"# {user}'s {args.year} {args.period.upper()} summary ({args.org})")
     print()
@@ -169,13 +176,17 @@ def main() -> int:
     print()
     print('## by repository')
     print()
-    print(_md_table([RepoCount(*rc) for rc in by_repo.most_common()]))
+    most_common = sorted(
+        [RepoCount(*rc) for rc in by_repo.most_common()],
+        key=lambda rc: rc.sort_key,
+    )
+    print(_md_table(most_common))
     print()
     print('## by date')
     print()
 
     for month, month_prs in by_month.items():
-        print(f"### {month_prs[0].date.strftime('%B').lower()}")
+        print(f"### {month_prs[0].dt.strftime('%B').lower()}")
         print()
         print(_md_table([pr.display for pr in month_prs]))
         print()
