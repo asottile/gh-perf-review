@@ -43,3 +43,7 @@ python3 gh_perf_review.py pre-commit 2018 Q4 |
     markdown-code-blocks-highlight /dev/stdin |
     sed 's|<body>|<head><style>td, th { padding: 5px; border: 1px solid #000; }</style></head><body>|g' > report.htm
 ```
+
+## sample output
+
+[pre-commit 2018 Y](example.md)
