@@ -162,7 +162,7 @@ def main() -> int:
     for pr in prs:
         by_month[pr.date.month].append(pr)
 
-    print(f"# {user}'s {args.year} {args.period.upper()} summary")
+    print(f"# {user}'s {args.year} {args.period.upper()} summary ({args.org})")
     print()
     print(f'- **{len(resp)}** PRs')
     print(f'- **{len(by_repo)}** repos')

@@ -1,4 +1,4 @@
-# asottile's 2018 Y summary
+# asottile's 2018 Y summary (pre-commit)
 
 - **165** PRs
 - **21** repos
