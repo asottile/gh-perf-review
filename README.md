@@ -9,7 +9,7 @@ hackety tool to view github PRs for a period
 
 1. Create a gh token on [the settings tab](//github.com/settings/tokens/new)
     - use `repo` scope if you need private repos, otherwise `public_repo`
-    - if your org is protected by SSO, make sure to enable that for the token
+    - if your org is protected by SSO, make sure to enable that for the token by clicking the Authorize button within the Enable SSO dropdown
 1. Write out the settings file needed for this script
 
     ```bash
