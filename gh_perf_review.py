@@ -4,6 +4,7 @@ import datetime
 import json
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from typing import Any
@@ -87,7 +88,13 @@ def _parse_link(lnk: Optional[str]) -> Dict[str, str]:
 
 
 def _req(url: str, **kwargs: Any) -> Response:
-    resp = urllib.request.urlopen(urllib.request.Request(url, **kwargs))
+    try:
+        resp = urllib.request.urlopen(urllib.request.Request(url, **kwargs))
+    except urllib.error.HTTPError as e:
+        print(f'HTTPError {e.code} {e.reason}.')
+        print(json.dumps(json.loads(e.read().decode()), indent=4))
+        sys.exit(-1)
+
     # TODO: https://github.com/python/typeshed/issues/2333
     from typing import cast
     resp = cast(urllib.response.addinfourl, resp)
