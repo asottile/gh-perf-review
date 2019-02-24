@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/asottile/gh-perf-review.svg?branch=master)](https://travis-ci.org/asottile/gh-perf-review)
+[![Build Status](https://dev.azure.com/asottile/asottile/_apis/build/status/asottile.gh-perf-review?branchName=master)](https://dev.azure.com/asottile/asottile/_build/latest?definitionId=8&branchName=master)
 
 gh-perf-review
 ==============
