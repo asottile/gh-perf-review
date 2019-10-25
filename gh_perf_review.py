@@ -95,9 +95,6 @@ def _req(url: str, **kwargs: Any) -> Response:
         print(json.dumps(json.loads(e.read().decode()), indent=4))
         sys.exit(-1)
 
-    # TODO: https://github.com/python/typeshed/issues/2333
-    from typing import cast
-    resp = cast(urllib.response.addinfourl, resp)
     return Response(json.load(resp), _parse_link(resp.headers['link']))
 
 
