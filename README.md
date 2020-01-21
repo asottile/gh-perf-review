@@ -20,13 +20,14 @@ hackety tool to view github PRs for a period
 
 ## generating markdown output
 
-Usage: `python3 gh_perf_review.py ORG YEAR PERIOD [--user USER]`
+Usage: `python3 gh_perf_review.py ORG YEAR PERIOD [--user USER] [--involves INVOLVES]`
 
 - `ORG`: the github organization to search in
 - `YEAR`: the four digit year to search in
 - `PERIOD`: the time period to search in, currently supported: Q1, Q2, Q3, Q4,
   H1, H2, Y
 - `--user USER`: optional, will use the authenticated user otherwise
+- `--involves INVOLVES`: optional, will filter for reviews involving this reviewer
 
 The script writes its output to stdout, if you'd like to capture that, redirect
 it to a file:
