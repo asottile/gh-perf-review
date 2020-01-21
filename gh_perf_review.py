@@ -144,6 +144,7 @@ def main() -> int:
     parser.add_argument('year', type=int)
     parser.add_argument('period', type=str.lower, choices=PERIODS)
     parser.add_argument('--user')
+    parser.add_argument('--involves', type=str.lower)
     args = parser.parse_args()
 
     token = json.loads(open('.github-auth.json').read())['token']
@@ -160,6 +161,9 @@ def main() -> int:
         f'org:{args.org} is:pr is:merged author:{user} '
         f'merged:{args.year}-{start}..{args.year}-{end}'
     )
+    if args.involves:
+        query = f'{query} involves:{args.involves}'
+
     query = urllib.parse.quote(query)
     url = f'/search/issues?q={query}&per_page=100&sort=merged'
     resp = _get_all(url, headers=headers)
