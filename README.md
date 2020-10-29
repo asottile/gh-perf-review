@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/asottile/asottile/_apis/build/status/asottile.gh-perf-review?branchName=master)](https://dev.azure.com/asottile/asottile/_build/latest?definitionId=8&branchName=master)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/asottile/gh-perf-review/master.svg)](https://results.pre-commit.ci/latest/github/asottile/gh-perf-review/master)
 
 gh-perf-review
 ==============
