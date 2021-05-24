@@ -172,7 +172,7 @@ def main() -> int:
     for pr_dct in resp:
         by_repo['/'.join(pr_dct['repository_url'].rsplit('/', 2)[-2:])] += 1
 
-    prs = sorted([PR.from_gh(pr) for pr in resp])
+    prs = sorted(PR.from_gh(pr) for pr in resp)
     by_month: DefaultDict[int, List[PR]] = collections.defaultdict(list)
     for pr in prs:
         by_month[pr.dt.month].append(pr)
@@ -185,7 +185,7 @@ def main() -> int:
     print('## by repository')
     print()
     most_common = sorted(
-        [RepoCount(*rc) for rc in by_repo.most_common()],
+        (RepoCount(*rc) for rc in by_repo.most_common()),
         key=lambda rc: rc.sort_key,
     )
     print(_md_table(most_common))
