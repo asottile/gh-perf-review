@@ -133,8 +133,8 @@ def _md_table(items: Sequence[Any]) -> str:
 
     fmt = f"|{'|'.join(fmts)}|\n"
     header = fmt.format(*columns)
-    sep = fmt.format(*['-' * width for width in widths])
-    lines = [fmt.format(*[str(x) for x in item]) for item in items]
+    sep = fmt.format(*('-' * width for width in widths))
+    lines = [fmt.format(*(str(x) for x in item)) for item in items]
     return f"{header}{sep}{''.join(lines)}"
 
 
