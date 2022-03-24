@@ -1,4 +1,4 @@
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/asottile/gh-perf-review/master.svg)](https://results.pre-commit.ci/latest/github/asottile/gh-perf-review/master)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/asottile/gh-perf-review/main.svg)](https://results.pre-commit.ci/latest/github/asottile/gh-perf-review/main)
 
 gh-perf-review
 ==============
