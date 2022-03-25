@@ -12,12 +12,8 @@ import urllib.request
 from typing import Any
 from typing import Counter
 from typing import DefaultDict
-from typing import Dict
-from typing import List
 from typing import NamedTuple
-from typing import Optional
 from typing import Sequence
-from typing import Tuple
 
 DATE_FMT = '%Y-%m-%dT%H:%M:%SZ'
 PERIODS = {
