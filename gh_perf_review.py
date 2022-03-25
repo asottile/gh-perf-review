@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import argparse
 import collections
 import datetime
@@ -31,7 +33,7 @@ PERIODS = {
 
 class Response(NamedTuple):
     json: Any
-    links: Dict[str, str]
+    links: dict[str, str]
 
 
 class RepoCount(NamedTuple):
@@ -39,7 +41,7 @@ class RepoCount(NamedTuple):
     prs: int
 
     @property
-    def sort_key(self) -> Tuple[int, str]:
+    def sort_key(self) -> tuple[int, str]:
         return -1 * self.prs, self.repo
 
 
@@ -56,7 +58,7 @@ class PR(NamedTuple):
     title: str
 
     @property
-    def display(self) -> '_PRDisplay':
+    def display(self) -> _PRDisplay:
         return _PRDisplay(
             self.dt.date().isoformat(),
             f'[{self.link_text}]',
@@ -64,14 +66,14 @@ class PR(NamedTuple):
         )
 
     @classmethod
-    def from_gh(cls, dct: Dict[str, Any]) -> 'PR':
+    def from_gh(cls, dct: dict[str, Any]) -> PR:
         date = datetime.datetime.strptime(dct['closed_at'], DATE_FMT)
         _, _, repo = dct['repository_url'].rpartition('/')
         link_text = f"{repo}#{dct['number']}"
         return cls(date, link_text, dct['html_url'], dct['title'])
 
 
-def _parse_link(lnk: Optional[str]) -> Dict[str, str]:
+def _parse_link(lnk: str | None) -> dict[str, str]:
     if lnk is None:
         return {}
 
@@ -98,9 +100,9 @@ def _req(url: str, **kwargs: Any) -> Response:
     return Response(json.load(resp), _parse_link(resp.headers['link']))
 
 
-def _get_all(url: str, **kwargs: Any) -> List[Dict[str, Any]]:
+def _get_all(url: str, **kwargs: Any) -> list[dict[str, Any]]:
     url = f'https://api.github.com{url}'
-    ret: List[Dict[str, Any]] = []
+    ret: list[dict[str, Any]] = []
     while True:
         print('.', end='', file=sys.stderr, flush=True)
         resp, links = _req(url, **kwargs)
@@ -173,7 +175,7 @@ def main() -> int:
         by_repo['/'.join(pr_dct['repository_url'].rsplit('/', 2)[-2:])] += 1
 
     prs = sorted(PR.from_gh(pr) for pr in resp)
-    by_month: DefaultDict[int, List[PR]] = collections.defaultdict(list)
+    by_month: DefaultDict[int, list[PR]] = collections.defaultdict(list)
     for pr in prs:
         by_month[pr.dt.month].append(pr)
 
