@@ -26,6 +26,7 @@ Usage: `python3 gh_perf_review.py ORG YEAR PERIOD [--user USER] [--involves INVO
 - `YEAR`: the four digit year to search in
 - `PERIOD`: the time period to search in, currently supported: Q1, Q2, Q3, Q4,
   H1, H2, Y
+- `--api-root API_ROOT`: optional, will use https://api.github.com by default
 - `--user USER`: optional, will use the authenticated user otherwise
 - `--involves INVOLVES`: optional, will filter for reviews involving this reviewer
 
