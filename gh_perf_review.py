@@ -97,7 +97,6 @@ def _req(url: str, **kwargs: Any) -> Response:
 
 
 def _get_all(url: str, **kwargs: Any) -> list[dict[str, Any]]:
-    url = f'https://api.github.com{url}'
     ret: list[dict[str, Any]] = []
     while True:
         print('.', end='', file=sys.stderr, flush=True)
@@ -141,6 +140,8 @@ def main() -> int:
     parser.add_argument('org')
     parser.add_argument('year', type=int)
     parser.add_argument('period', type=str.lower, choices=PERIODS)
+    # TODO sanitize this somehow?
+    parser.add_argument('--api-root', default='https://api.github.com')
     parser.add_argument('--user')
     parser.add_argument('--involves', type=str.lower)
     args = parser.parse_args()
@@ -149,7 +150,7 @@ def main() -> int:
     headers = {'Authorization': f'token {token}'}
 
     if args.user is None:
-        user_resp, _ = _req('https://api.github.com/user', headers=headers)
+        user_resp, _ = _req(f'{args.api_root}/user', headers=headers)
         user = user_resp['login']
     else:
         user = args.user
@@ -163,7 +164,7 @@ def main() -> int:
         query = f'{query} involves:{args.involves}'
 
     query = urllib.parse.quote(query)
-    url = f'/search/issues?q={query}&per_page=100&sort=merged'
+    url = f'{args.api_root}/search/issues?q={query}&per_page=100&sort=merged'
     resp = _get_all(url, headers=headers)
 
     by_repo: Counter[str] = collections.Counter()
