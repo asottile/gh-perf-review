@@ -192,7 +192,7 @@ def main() -> int:
     print('## by date')
     print()
 
-    for month, month_prs in by_month.items():
+    for month_prs in by_month.values():
         print(
             f"### {month_prs[0].dt.strftime('%B').lower()} "
             f'({len(month_prs)} prs)',
