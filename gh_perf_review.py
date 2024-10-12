@@ -9,11 +9,11 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from collections import Counter
+from collections.abc import Sequence
 from typing import Any
-from typing import Counter
 from typing import DefaultDict
 from typing import NamedTuple
-from typing import Sequence
 
 DATE_FMT = '%Y-%m-%dT%H:%M:%SZ'
 PERIODS = {
