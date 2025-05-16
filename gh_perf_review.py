@@ -144,7 +144,8 @@ def main() -> int:
     parser.add_argument('--api-root', default='https://api.github.com')
     parser.add_argument('--user')
     parser.add_argument('--involves', type=str.lower)
-    parser.add_argument('--custom-period', type=str.lower, help='a custom period in the format MM-DD,MM-DD. used with period=custom.')
+    parser.add_argument('--custom-period', type=str.lower,
+                        help='a custom period in the format MM-DD,MM-DD. used with period=custom.')
     args = parser.parse_args()
 
     token = json.loads(open('.github-auth.json').read())['token']
