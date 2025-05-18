@@ -139,11 +139,18 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument('org')
     parser.add_argument('year', type=int)
-    parser.add_argument('period', type=str.lower, choices=PERIODS)
+    parser.add_argument('period', type=str.lower, choices=(*PERIODS, 'custom'))
     # TODO sanitize this somehow?
     parser.add_argument('--api-root', default='https://api.github.com')
     parser.add_argument('--user')
     parser.add_argument('--involves', type=str.lower)
+    parser.add_argument(
+        '--custom-period', type=str.lower,
+        help=(
+            'a custom period in the format MM-DD,MM-DD. '
+            'used with period=custom.'
+        ),
+    )
     args = parser.parse_args()
 
     token = json.loads(open('.github-auth.json').read())['token']
@@ -155,7 +162,12 @@ def main() -> int:
     else:
         user = args.user
 
-    start, end = PERIODS[args.period]
+    if args.period == 'custom':
+        assert args.custom_period
+        start, _, end = args.custom_period.partition(',')
+    else:
+        assert not args.custom_period
+        start, end = PERIODS[args.period]
     query = (
         f'org:{args.org} is:pr is:merged author:{user} '
         f'merged:{args.year}-{start}..{args.year}-{end}'
@@ -176,7 +188,12 @@ def main() -> int:
     for pr in prs:
         by_month[pr.dt.month].append(pr)
 
-    print(f"# {user}'s {args.year} {args.period.upper()} summary ({args.org})")
+    period_text = (
+        args.custom_period
+        if args.period == 'custom'
+        else args.period.upper()
+    )
+    print(f"# {user}'s {args.year} {period_text} summary ({args.org})")
     print()
     print(f'- **{len(resp)}** PRs')
     print(f'- **{len(by_repo)}** repos')
