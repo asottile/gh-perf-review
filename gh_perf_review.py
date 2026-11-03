@@ -85,7 +85,7 @@ def _parse_link(lnk: str | None) -> dict[str, str]:
 
 def _req(url: str, **kwargs: Any) -> Response:
     try:
-        resp = urllib.request.urlopen(urllib.request.Request(url, **kwargs))
+        resp = urllib.request.urlopen(urllib.request.Request(url, **kwargs), timeout=60)
     except urllib.error.HTTPError as e:
         print(f'HTTPError {e.code} {e.reason}.', file=sys.stderr)
         ejson = json.dumps(json.loads(e.read().decode()), indent=4)
